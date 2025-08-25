@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      /* --- Footer Contact --- */
+      footer {
+        background-color: #111;
+        padding: 3rem 9%;
+        text-align: center;
+        border-top: 2px solid #b74b4b;
+      }
+
+      footer h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #b74b4b;
+      }
+
+      footer p {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        color: #ccc;
+      }
+
+      .social-links a {
+        color: #b74b4b;
+        font-size: 2rem;
+        margin: 0 1rem;
+        transition: color 0.3s;
+      }
+
+      .social-links a:hover {
+        color: white;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Portfolio Website</title>
+    <!-- Prefetch các trang -->
+    <link rel="prefetch" href="services.html" />
+    <link rel="prefetch" href="index.html" />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <a href="#" class="logo">Portfolio</a>
+
+      <nav>
+        <a href="#" class="active"> Home</a>
+        <a href="services.html">Services</a>
+        <a href="skills.html">Skills</a>
+        <a href="education.html">Education</a>
+        <a href="experience.html">Experience</a>
+      </nav>
+    </header>
+    <section class="home">
+      <div class="home-img">
+        <img src="main.jpg" alt="" />
+      </div>
+      <div class="home-content">
+        <h1>Hi, I am <span>Vo Nghia</span></h1>
+        <h3 class="typing-text">I'm a <span></span></h3>
+        <p>
+          I am a software engineer with one year of experience working with
+          JavaScript, Python, C#, and C++. Currently, I am a second-year
+          Information Technology student at the University of Economics Ho Chi
+          Minh City. I am passionate about software development and eager to
+          apply my skills to real-world projects. I am actively seeking an
+          internship opportunity related to my tech stack, where I can
+          contribute to the team’s success while further enhancing my
+          professional skills.
+        </p>
+        <div class="social-icons">
+          <a
+            href="https://www.linkedin.com/in/ngh%C4%A9a-v%C3%B5-a3430b337/"
+            target="_blank"
+            ><i class="fa-brands fa-linkedin"></i
+          ></a>
+          <a href="https://github.com/kphlavonghia" target="_blank"
+            ><i class="fa-brands fa-github"></i
+          ></a>
+          <a href="https://www.facebook.com/vo.nghia.94043/" target="_blank"
+            ><i class="fa-brands fa-facebook"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+    <script>
+      const roles = [
+        "Web Developer",
+        "Javascript Developer",
+        "Web Designer",
+        "Backend Developer",
+        "second-year student",
+      ];
+      let roleIndex = 0;
+      let charIndex = 0;
+      let currentRole = "";
+      let isDeleting = false;
+      const typingSpan = document.querySelector(".typing-text span");
+
+      function typeEffect() {
+        currentRole = roles[roleIndex];
+
+        if (!isDeleting) {
+          typingSpan.textContent = currentRole.substring(0, charIndex + 1);
+          charIndex++;
+          if (charIndex === currentRole.length) {
+            isDeleting = true;
+            setTimeout(typeEffect, 1500); // dừng 1.5s trước khi xoá
+            return;
+          }
+        } else {
+          typingSpan.textContent = currentRole.substring(0, charIndex - 1);
+          charIndex--;
+          if (charIndex === 0) {
+            isDeleting = false;
+            roleIndex = (roleIndex + 1) % roles.length; // chuyển sang từ tiếp theo
+          }
+        }
+        setTimeout(typeEffect, isDeleting ? 50 : 100); // tốc độ xoá nhanh hơn gõ
+      }
+
+      typeEffect();
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Khi tải trang -> hiển thị mượt
+        document.body.classList.add("fade");
+        setTimeout(() => {
+          document.body.classList.add("show");
+        }, 50);
+
+        // Khi click link -> chuyển cảnh mượt
+        document.querySelectorAll("a").forEach((link) => {
+          if (link.hostname === window.location.hostname) {
+            link.addEventListener("click", function (e) {
+              const href = link.getAttribute("href");
+              if (!href.startsWith("#") && href !== "") {
+                e.preventDefault();
+                document.body.classList.remove("show");
+                setTimeout(() => {
+                  window.location.href = href;
+                }, 250); // thời gian khớp với CSS transition
+              }
+            });
+          }
+        });
+      });
+    </script>
+    <!-- Footer Contact -->
+    <footer>
+      <h2>Contact Me</h2>
+      <p>📞 Phone: +84 0352690523</p>
+      <p>📧 Email: vonghia2306@gmail.com</p>
+      <div class="social-links">
+        <a
+          href="https://www.linkedin.com/in/ngh%C4%A9a-v%C3%B5-a3430b337/"
+          target="_blank"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <a href="https://github.com/kphlavonghia" target="_blank"
+          ><i class="fab fa-github"></i
+        ></a>
+        <a href="https://www.facebook.com/vo.nghia.94043/" target="_blank"
+          ><i class="fab fa-facebook"></i
+        ></a>
+      </div>
+    </footer>
+  </body>
+</html>
